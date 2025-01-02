@@ -31,4 +31,17 @@
     //Play an entire game
       //initialize playGame function
         //calls playRound 5 times, keeps track of the scores, and declares a winner at the end
-        
+
+
+
+function getComputerChoice(pcChoice){
+  if(Math.random(pcChoice) <= .33){
+    return "Rock"
+  }else if(Math.random(pcChoice) <= .66){
+    return "Paper"
+  }else{
+    return "Scissors"
+  }
+}
+
+console.log(getComputerChoice())
