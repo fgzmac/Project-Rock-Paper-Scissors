@@ -44,4 +44,18 @@ function getComputerChoice(pcChoice){
   }
 }
 
-console.log(getComputerChoice())
+function getHumanChoice(userChoice){
+  userSelection = window.prompt("Do you choose Rock, Paper, or Scissors?")
+
+  if(userSelection.toLowerCase() === 'rock'){
+    console.log('rock')
+  }else if(userSelection.toLowerCase() === 'paper'){
+    console.log('paper')
+  }else if(userSelection.toLowerCase() === 'scissors'){
+    console.log('scissors')
+  }else{
+    alert("Invalid Selection")
+  }
+}
+
+getHumanChoice()
