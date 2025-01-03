@@ -34,29 +34,29 @@
 
 
 
-function getComputerChoice(pcChoice){
-  if(Math.random(pcChoice) <= .33){
-    return "Rock"
-  }else if(Math.random(pcChoice) <= .66){
-    return "Paper"
+function getComputerChoice(){
+  if(Math.random() <= .33){
+    return "Rock";
+  }else if(Math.random() <= .66){
+    return "Paper";
   }else{
-    return "Scissors"
+    return "Scissors";
   }
 }
 
-function getHumanChoice(userChoice){
-  userSelection = window.prompt("Do you choose Rock, Paper, or Scissors?")
+function getHumanChoice(){
+  let userSelection = window.prompt("Do you choose Rock, Paper, or Scissors?");
 
-  if(userSelection.toLowerCase() === 'rock'){
-    console.log('rock')
-  }else if(userSelection.toLowerCase() === 'paper'){
-    console.log('paper')
-  }else if(userSelection.toLowerCase() === 'scissors'){
-    console.log('scissors')
-  }else{
-    alert("Invalid Selection")
+  if(userSelection){
+    userSelection = userSelection.toLowerCase()
   }
-}
 
-let humanScore = 0
-let computerScore = 0
+let humanScore = 0;
+let computerScore = 0;
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+function playRound(humanChoice, computerChoice){
+
+}
