@@ -32,7 +32,8 @@
       //initialize playGame function
         //calls playRound 5 times, keeps track of the scores, and declares a winner at the end
 
-
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
 
 function getComputerChoice(){
   let randomIndex = Math.random()
@@ -63,6 +64,8 @@ function getHumanChoice(){
   }
 }
 
+function playGame(){
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -81,7 +84,6 @@ function playRound(humanChoice, computerChoice){
   }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
 
-console.log(playRound(humanSelection, computerSelection))
+
+}
