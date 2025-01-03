@@ -35,28 +35,53 @@
 
 
 function getComputerChoice(){
-  if(Math.random() <= .33){
-    return "Rock";
-  }else if(Math.random() <= .66){
-    return "Paper";
+  let randomIndex = Math.random()
+  if(randomIndex <= .33){
+    return "rock";
+  }else if(randomIndex <= .66){
+    return "paper";
   }else{
-    return "Scissors";
+    return "scissors";
   }
 }
 
 function getHumanChoice(){
   let userSelection = window.prompt("Do you choose Rock, Paper, or Scissors?");
 
-  if(userSelection){
-    userSelection = userSelection.toLowerCase()
+  if (userSelection) {
+    userSelection = userSelection.toLowerCase();
+
+    if (userSelection === 'rock' || userSelection === 'paper' || userSelection === 'scissors'){
+      return userSelection;
+    } else {
+      alert('Invalid Selection');
+      return getHumanChoice();
+    }
+  } else {
+    alert('Make a selection');
+    return getHumanChoice();
   }
+}
 
 let humanScore = 0;
 let computerScore = 0;
 
+function playRound(humanChoice, computerChoice){
+  if(( humanChoice === 'rock' && computerChoice === 'scissors') ||
+     ( humanChoice === 'paper' && computerChoice === 'rock') ||
+     ( humanChoice === 'scissors' && computerChoice === 'paper')
+  ){
+    humanScore ++;
+    return `You Win! ${humanChoice} beats ${computerChoice}`;
+  } else if(humanChoice === computerChoice){
+    return `It's a tie!`;
+  } else {
+    computerScore ++;
+    return `You Lose! ${computerChoice} beats ${humanChoice}`
+  }
+}
+
 const humanSelection = getHumanChoice();
 const computerSelection = getComputerChoice();
 
-function playRound(humanChoice, computerChoice){
-
-}
+console.log(playRound(humanSelection, computerSelection))
