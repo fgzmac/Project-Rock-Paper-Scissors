@@ -74,12 +74,10 @@ const playRound = function(humanChoice, computerChoice){
      ( humanChoice === 'paper' && computerChoice === 'rock') ||
      ( humanChoice === 'scissors' && computerChoice === 'paper')
   ){
-    humanScore ++;
     return `You Win! ${humanChoice} beats ${computerChoice}`;
   } else if(humanChoice === computerChoice){
     return `It's a tie!`;
   } else {
-    computerScore ++;
     return `You Lose! ${computerChoice} beats ${humanChoice}`;
   }
 }
