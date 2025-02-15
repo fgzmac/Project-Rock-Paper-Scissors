@@ -1,74 +1,68 @@
-function getComputerChoice(){
-  let randomIndex = Math.random()
-  if(randomIndex <= .33){
-    return "rock";
-  }else if(randomIndex <= .66){
-    return "paper";
-  }else{
-    return "scissors";
-  }
-}
-
-function getHumanChoice(){
-  let userSelection = window.prompt("Do you choose Rock, Paper, or Scissors?");
-
-  if (userSelection) {
-    userSelection = userSelection.toLowerCase();
-
-    if (userSelection === 'rock' || userSelection === 'paper' || userSelection === 'scissors'){
-      return userSelection;
-    } else {
-      alert('Invalid Selection');
-      return getHumanChoice();
-    }
-  } else {
-    alert('Make a selection');
-    return getHumanChoice();
-  }
-}
-
 function playGame(){
-const choices = ["rock", "paper", "scissors"]
-const div = document.querySelector('div');
-const rockButton = document.createElement('button');
-const paperButton = document.createElement('button');
-const scissorButton = document.createElement('button');
+  let humanScore = 0;
+  let computerScore = 0;
+  const container = document.querySelector("#container");
+  const humanSelection = document.querySelectorAll("button");
+  const scoreDisplay = document.createElement("div");
+  container.appendChild(scoreDisplay);
 
-let humanScore = 0;
-let computerScore = 0;
+  function updateScore(){
+    scoreDisplay.textContent = `Score: You ${humanScore} - Computer ${computerScore} `;
+  }
 
-const playRound = function(humanChoice, computerChoice){
-  if(( humanChoice === 'rock' && computerChoice === 'scissors') ||
+  function getComputerChoice(){
+    let randomIndex = Math.random()
+    if(randomIndex <= .33){
+      return "rock";
+    }else if(randomIndex <= .66){
+      return "paper";
+    }else{
+      return "scissors";
+    }
+  }
+ 
+  function playRound(humanChoice, computerChoice){
+    if(( humanChoice === 'rock' && computerChoice === 'scissors') ||
      ( humanChoice === 'paper' && computerChoice === 'rock') ||
      ( humanChoice === 'scissors' && computerChoice === 'paper')
-  ){
-    return `You Win! ${humanChoice} beats ${computerChoice}`;
-  } else if(humanChoice === computerChoice){
+    ){
+    return `You Win! ${humanChoice} beats ${computerChoice}.`;
+    } else if(humanChoice === computerChoice){
     return `It's a tie!`;
-  } else {
+    } else {
     return `You Lose! ${computerChoice} beats ${humanChoice}`;
-  }
-}
-  const humanSelection = getHumanChoice();
-  const computerSelection = getComputerChoice();
-  const result = playRound(humanSelection, computerSelection);
-  console.log(result);
-  
-  if(result.includes(`You Win! ${humanSelection} beats ${computerSelection}`)){
-    humanScore++;
-    }else if(result.includes(`You Lose! ${computerSelection} beats ${humanSelection}`)){
-    computerScore++;
     }
-
-  console.log(`Final Score: Player:${humanScore} - Computer:${computerScore}`);
-  
-  if(humanScore > computerScore){
-    return "YOU WIN!"
-  }else if(computerScore > humanScore){
-    return "YOU LOSE!"
-  }else{
-    return "IT IS A TIE!"
   }
+
+  //initializes each button to return rock, paper, or scissors and appends result of the round to the DOM.
+  humanSelection.forEach((button) => {
+    button.addEventListener("click", () => {
+      const computerChoice = getComputerChoice();
+      const humanChoice = button.getAttribute("id"); 
+      const selections = document.createElement("div");
+          selections.textContent = `You selected ${humanChoice} and computer selected ${computerChoice}`;
+          container.appendChild(selections);
+      const results = document.createElement('div');
+        results.textContent = `${playRound(humanChoice, computerChoice)}.`;
+        container.appendChild(results);
+
+      if(results.textContent.startsWith("You Win!")) {
+        humanScore++;
+        updateScore();
+      }else if(results.textContent.startsWith("You Lose!")){
+        computerScore++;
+        updateScore();
+      }
+
+      if(humanScore === 5){
+        const humanDub = alert('You have reached a score of 5. You are the winner. GG.');
+        location.reload();
+      }else if(computerScore === 5){
+        const computerDub = alert('Computer has reached a score of 5. You Lose. GG.');
+        location.reload();
+      }
+    })
+  })
 }
 
-console.log(playGame())
+playGame();
